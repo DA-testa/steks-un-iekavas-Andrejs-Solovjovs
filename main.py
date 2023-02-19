@@ -10,19 +10,23 @@ def find_mismatch(text):
     opening_brackets_stack = []
     for a, next in enumerate(text):
         if next in "([{":
-            opening_brackets_stack.append(next)
+            opening_brackets_stack.append(Bracket(next, a + 1))
         if next in ")]}":
-            prev = opening_brackets_stack.pop()
-            if not are_matching(prev, next):
+            if not opening_brackets_stack:
                 return a + 1
+            top = opening_brackets_stack.pop()
+            if not are_matching(top.char, next):
+
+                return a + 1
+    if opening_brackets_stack:
+        return opening_brackets_stack[0].position
+
     return "Success"
 
 def main():
-    test = input()
-    if 'A' == test[0]:
-        text = input()
+    text = input()
     mismatch = find_mismatch(text)
-    print (mismatch)
+    print(mismatch)
 
-if _name_ == "main":
+if _name_ == "_main_":
     main()
