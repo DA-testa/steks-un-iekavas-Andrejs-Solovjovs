@@ -10,20 +10,20 @@ def are_matching(left, right):
 
 def find_mismatch(text):
     opening_brackets_stack = []
-    for i, next in enumerate(text):
+    for a, next in enumerate(text):
         if next in "([{":
             opening_brackets_stack.append(next)
 
         if next in ")]}":
             prev = opening_brackets_stack.pop()
             if not are_matching(prev, next):
-                return i+1
+                return a+1
     return "Success"
 
 
 def main():
     test = input()
-    if 'I' == test[0]:
+    if 'A' == test[0]:
         text = input()
     mismatch = find_mismatch(text)
     print (mismatch)
